@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import DonorList from './DonorList'
+import DonorGroup from './DonorGroup'
 import registerServiceWorker from './registerServiceWorker';
+import bootstrap from '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(<DonorList />, document.getElementById('root'));
+ReactDOM.render(<DonorGroup />, document.getElementById('root'));
 registerServiceWorker();
