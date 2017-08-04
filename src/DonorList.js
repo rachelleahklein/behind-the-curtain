@@ -1,18 +1,13 @@
 import React from 'react';
+import DonorItem from './DonorItem'
 
 function DonorList(props) {
   return (
-    <div>
-      <ul>
-      {
-        props.donors.map(function(donor) {
-          return(
-            <li key={donor.contributor_payee}>{donor.contributor_payee} - {donor.sum}</li>
-          );
-        })
-      }
-      </ul>
-    </div>
+    <ul>
+      {props.donors.map((donor) =>
+        <DonorItem key={donor.contributor_payee.toString()} donor={donor} />
+      )}
+    </ul>
   );
 }
 

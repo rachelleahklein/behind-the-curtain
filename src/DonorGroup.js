@@ -9,6 +9,9 @@ class DonorGroup extends React.Component {
     donors: donors
   }
 }
+// componentDidMount() {
+//   this.setState({donors: newDonors});
+// }
   render() {
     return (
       <DonorList donors={this.state.donors} />
