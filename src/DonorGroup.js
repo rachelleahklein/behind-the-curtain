@@ -13,6 +13,8 @@ class DonorGroup extends React.Component {
   }
   this.hitBusinessServer = this.hitBusinessServer.bind(this);
   this.hitDonorServer = this.hitDonorServer.bind(this);
+  this.descendingButtonClick = this.descendingButtonClick.bind(this);
+  this.ascendingButtonClick = this.ascendingButtonClick.bind(this);
 }
 
 hitBusinessServer() {
@@ -34,11 +36,37 @@ componentDidMount() {
   this.hitDonorServer();
 }
 
+descendingButtonClick() {
+  function descendingSort(a,b) {
+    return parseFloat(b.sum, 10) - parseFloat(a.sum, 10);
+  }
+  const sortedDonors = this.state.donors.sort(descendingSort);
+  const sortedBusinesses = this.state.businesses.sort(descendingSort);
+  this.setState({
+    donors: sortedDonors,
+    businesses: sortedBusinesses
+  });
+}
+
+ascendingButtonClick() {
+  function ascendingSort(a,b) {
+    return parseFloat(a.sum, 10) - parseFloat(b.sum, 10);
+  }
+  const sortedDonors = this.state.donors.sort(ascendingSort);
+  const sortedBusinesses = this.state.businesses.sort(ascendingSort);
+  this.setState({
+    donors: sortedDonors,
+    businesses: sortedBusinesses
+  });
+}
+
   render() {
     return (
       <div>
         <DonorList donors={this.state.businesses} />
         <DonorList donors={this.state.donors} />
+        <button onClick={this.ascendingButtonClick}>Ascending Order</button>
+        <button onClick={this.descendingButtonClick}>Descending Order</button>
       </div>
     );
   }
