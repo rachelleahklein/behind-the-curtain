@@ -1,31 +1,40 @@
 import React from 'react';
 import DonorList from './DonorList'
 
-const BUSINESS_API = 'http://54.213.83.132/hackoregon/http/oregon_business_contributors/5/';
-const DONOR_API = 'http://54.213.83.132/hackoregon/http/oregon_individual_contributors/5/'
+const BUSINESS_API = 'http://54.213.83.132/hackoregon/http/oregon_business_contributors/';
+const DONOR_API = 'http://54.213.83.132/hackoregon/http/oregon_individual_contributors/'
 
 class DonorGroup extends React.Component {
   constructor(props) {
   super(props);
   this.state = {
     businesses: [],
-    donors: []
+    donors: [],
+    textValue: 5,
   }
   this.hitBusinessServer = this.hitBusinessServer.bind(this);
   this.hitDonorServer = this.hitDonorServer.bind(this);
   this.descendingButtonClick = this.descendingButtonClick.bind(this);
   this.ascendingButtonClick = this.ascendingButtonClick.bind(this);
+  this.handleInputChange = this.handleInputChange.bind(this);
+  this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+makeUrl(type, num) {
+  var baseUrl = (type === 'business' ? BUSINESS_API : DONOR_API);
+  var url = baseUrl + num + '/';
+  return url
 }
 
 hitBusinessServer() {
-  return fetch(BUSINESS_API)
+  return fetch(this.makeUrl('business', this.state.textValue))
     .then(response => response.json())
     .then(data => this.setState({ businesses: data }))
     .catch(error => console.log(error))
 }
 
 hitDonorServer() {
-  return fetch(DONOR_API)
+  return fetch(this.makeUrl('individual', this.state.textValue))
     .then(response => response.json())
     .then(data => this.setState({ donors: data }))
     .catch(error => console.log(error))
@@ -60,6 +69,16 @@ ascendingButtonClick() {
   });
 }
 
+handleInputChange(event) {
+  this.setState({textValue: event.target.value});
+}
+
+handleSubmit(event) {
+  this.hitBusinessServer();
+  this.hitDonorServer();
+  event.preventDefault();
+  }
+
   render() {
     return (
       <div>
@@ -67,6 +86,11 @@ ascendingButtonClick() {
         <DonorList donors={this.state.donors} />
         <button onClick={this.ascendingButtonClick}>Ascending Order</button>
         <button onClick={this.descendingButtonClick}>Descending Order</button>
+        <form onSubmit={this.handleSubmit}>
+          <p>Enter the number of results you would like to see.</p>
+          <input type="text" value={this.state.textValue} onChange={this.handleInputChange} />
+          <input type="submit" value="Submit" />
+        </form>
       </div>
     );
   }
