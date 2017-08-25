@@ -7,7 +7,7 @@ const Wrapper = styled.section`
   padding: 1rem;
   background: lightblue;
   border: 5px solid #369;
-  margin: 1%;
+  margin: 2.5%;
   border-radius: 5px;
 `;
 

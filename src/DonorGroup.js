@@ -1,8 +1,14 @@
 import React from 'react';
 import DonorList from './DonorList'
+import styled from 'styled-components';
 
 const BUSINESS_API = 'http://54.213.83.132/hackoregon/http/oregon_business_contributors/';
 const DONOR_API = 'http://54.213.83.132/hackoregon/http/oregon_individual_contributors/'
+
+const InputWrapper = styled.div`
+  clear: both;
+  margin: 2.5%;
+`;
 
 class DonorGroup extends React.Component {
   constructor(props) {
@@ -84,13 +90,15 @@ handleSubmit(event) {
       <div>
         <DonorList donors={this.state.businesses} />
         <DonorList donors={this.state.donors} />
-        <button onClick={this.ascendingButtonClick}>Ascending Order</button>
-        <button onClick={this.descendingButtonClick}>Descending Order</button>
-        <form onSubmit={this.handleSubmit}>
-          <p>Enter the number of results you would like to see.</p>
-          <input type="text" value={this.state.textValue} onChange={this.handleInputChange} />
-          <input type="submit" value="Submit" />
-        </form>
+        <InputWrapper>
+          <button btn-primary onClick={this.ascendingButtonClick}>Ascending Order</button>
+          <button onClick={this.descendingButtonClick}>Descending Order</button>
+          <form onSubmit={this.handleSubmit}>
+            <p>Enter the number of results you would like to see.</p>
+            <input type="text" value={this.state.textValue} onChange={this.handleInputChange} />
+            <input type="submit" value="Submit" />
+            </form>
+        </InputWrapper>
       </div>
     );
   }
