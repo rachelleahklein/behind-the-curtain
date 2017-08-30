@@ -1,5 +1,6 @@
 import React from 'react';
 import DonorList from './DonorList'
+import Summary from './Summary'
 import styled from 'styled-components';
 
 const BUSINESS_API = 'http://54.213.83.132/hackoregon/http/oregon_business_contributors/';
@@ -8,6 +9,20 @@ const DONOR_API = 'http://54.213.83.132/hackoregon/http/oregon_individual_contri
 const InputWrapper = styled.div`
   clear: both;
   margin: 2.5%;
+  background-color: lightgray;
+  width: 30%;
+  padding: 2%
+`;
+
+const Header = styled.h2`
+  padding: 2%;
+  margin: 1% 2.5% 1%;
+  background: lightgray;
+  width: 30%;
+  text-align: center;
+  font-family: Helvetica;
+  border: 1px dashed #ddd;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px #ddd, 0 0 0 10px #fff, 0 0 2px 10px #eee;
 `;
 
 class DonorGroup extends React.Component {
@@ -91,7 +106,7 @@ handleSubmit(event) {
         <DonorList donors={this.state.businesses} />
         <DonorList donors={this.state.donors} />
         <InputWrapper>
-          <button btn-primary onClick={this.ascendingButtonClick}>Ascending Order</button>
+          <button onClick={this.ascendingButtonClick}>Ascending Order</button>
           <button onClick={this.descendingButtonClick}>Descending Order</button>
           <form onSubmit={this.handleSubmit}>
             <p>Enter the number of results you would like to see.</p>
@@ -99,6 +114,7 @@ handleSubmit(event) {
             <input type="submit" value="Submit" />
             </form>
         </InputWrapper>
+        <Summary />
       </div>
     );
   }

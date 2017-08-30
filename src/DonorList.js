@@ -4,15 +4,18 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
   float: left;
-  padding: 1rem;
+  padding: 2%;
   background: lightblue;
-  border: 5px solid #369;
-  margin: 2.5%;
+  margin: 1% 2.5% 2.5%;
   border-radius: 5px;
+  width: 30%;
 `;
 
 const StylishList = styled.ul`
   list-style: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 `;
 
 function DonorList(props) {
